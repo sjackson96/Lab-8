@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Age Calculator</title>
+    </head>
+    <body>
+        <header>
+            <h1>Age Calculator</h1>
+            <p> This calculates how old you are. This programs calculates the exact
+                age you are by days, months, and years.
+            </p>
+            <p> Today's date is: 
+            <script>
+                //Only using var here so that d is global
+                var d = new Date();
+                const t = (d.getMonth()+1)+'/'+ d.getDate()+'/'+ d.getFullYear();
+                document.write(t);
+            </script>
+            </p>
+            <select id="monthBT">
+                <option value="default">Select a month</option>
+            </select>
+
+            <select id="dayBT">
+                <option value="default">Select a day</option>
+            </select>
+
+            <select id="yearBT">
+                <option value="default">Select a year</option>
+            </select>
+
+            <br>
+            <br>
+            <button type="button" id="DB" onclick="dayFun()">Calculate days!</button>
+            <button type="button" id="MB" onclick="monthFun()">Calculate months!</button>
+            <button type="button" id="YB" onclick="yearFun()">Calculate years!</button>
+            <br>
+            <br>
+            <span type = "text" id = "filler"></span>
+            <!-- Under this is the button functions -->
+            <script>
+                function yearFun(){
+                    if(document.getElementById("yearBT").value === "default"
+                    || document.getElementById("dayBT").value === "default"
+                    || document.getElementById("monthBT").value === "default"){
+                        alert("Please insert all values");
+                        return;
+                    }
+
+                    if(document.getElementById("monthBT").value === "April"  
+                    ||document.getElementById("monthBT").value === "June" 
+                    ||document.getElementById("monthBT").value === "Setember" 
+                    ||document.getElementById("monthBT").value === "November"){
+                        if(document.getElementById("dayBT").value > 30){
+                            alert("Not a valid combination");
+                            return undefined;
+                        }
+                    }
+
+                    else if(document.getElementById("monthBT").value === "Febuary")
+                    {
+                        if (isLeapYear(document.getElementById("yearBT").value) === true){
+                            if(document.getElementById("dayBT").value > 29){
+                                alert("Not a valid combination");
+                                return undefined;
+                            }
+                        }
+                        else{
+                            if(document.getElementById("dayBT").value > 28){
+                                alert("Not a valid combination");
+                                return undefined;
+                            }
+                        }
+                    }
+
+
+                    let x = document.getElementById("yearBT");
+                    let y = x.options[x.selectedIndex].value;
+                    y = d.getFullYear() - y;
+                    document.getElementById("filler").innerHTML = "You are: "+y+ " year(s) old.";
+                }
+            </script>
+
+            <script>
+                function monthFun(){
+                    if(document.getElementById("yearBT").value === "default"
+                    || document.getElementById("dayBT").value === "default"
+                    || document.getElementById("monthBT").value === "default"){
+                        alert("Please insert all values");
+                        return undefined;
+                    }
+
+                    if(document.getElementById("monthBT").value === "April"  
+                    ||document.getElementById("monthBT").value === "June" 
+                    ||document.getElementById("monthBT").value === "Setember" 
+                    ||document.getElementById("monthBT").value === "November"){
+                        if(document.getElementById("dayBT").value > 30){
+                            alert("Not a valid combination");
+                            return undefined;
+                        }
+                    }
+                    else if(document.getElementById("monthBT").value === "Febuary")
+                    {
+                        if (isLeapYear(document.getElementById("yearBT").value) === true){
+                            if(document.getElementById("dayBT").value > 29){
+                                alert("Not a valid combination");
+                                return undefined;
+                            }
+                        }
+                        else{
+                            if(document.getElementById("dayBT").value > 28){
+                                alert("Not a valid combination");
+                                return undefined;
+                            }
+                        }
+                    }
+
+
+                    let x = document.getElementById("monthBT");
+                    let y = x.options[x.selectedIndex].value;
+                    const dict = {
+                        "January":1,
+                        "Febuary":2,
+                        "March":3,
+                        "April":4,
+                        "May":5,
+                        "June":6,
+                        "July":7,
+                        "August":8,
+                        "Setember":9,
+                        "October":10,
+                        "November":11,
+                        "December":12
+                    }
+                    let offset = -1;
+                    if(document.getElementById("dayBT").value >= d.getDate()){
+                        offset = 0;
+                    }
+                    let a = document.getElementById("yearBT");
+                    let b = a.options[a.selectedIndex].value;
+                    z = d.getFullYear() - b;
+                    z *= 12;
+                    y = (((d.getMonth()+1)-dict[document.getElementById("monthBT").value])+z+offset)
+                    document.getElementById("filler").innerHTML = "You are: "+y+ " month(s) old.";
+                }
+            </script>
+
+            <script>
+                function dayFun(){
+                    if(document.getElementById("dayBT").value === "default"
+                    || document.getElementById("yearBT").value === "default"
+                    || document.getElementById("monthBT").value === "default")
+                    {
+                        alert("Please insert all values");
+                        return undefined;
+                    }
+
+                    if(document.getElementById("monthBT").value === "April"  
+                    ||document.getElementById("monthBT").value === "June" 
+                    ||document.getElementById("monthBT").value === "Setember" 
+                    ||document.getElementById("monthBT").value === "November"){
+                        if(document.getElementById("dayBT").value > 30){
+                            alert("Not a valid combination");
+                            return undefined;
+                        }
+                    }
+                    else if(document.getElementById("monthBT").value === "Febuary")
+                    {
+                        if (isLeapYear(document.getElementById("yearBT").value) === true){
+                            if(document.getElementById("dayBT").value > 29){
+                                alert("Not a valid combination");
+                                return undefined;
+                            }
+                        }
+                        else{
+                            if(document.getElementById("dayBT").value > 28){
+                                alert("Not a valid combination");
+                                return undefined;
+                            }
+                        }
+                    }
+                    
+                    const dict = {
+                        "January":1,
+                        "Febuary":2,
+                        "March":3,
+                        "April":4,
+                        "May":5,
+                        "June":6,
+                        "July":7,
+                        "August":8,
+                        "Setember":9,
+                        "October":10,
+                        "November":11,
+                        "December":12,
+                    //This is the reverse of the list
+                        1:"January",
+                        2:"Febuary",
+                        3:"March",
+                        4:"April",
+                        5:"May",
+                        6:"June",
+                        7:"July",
+                        8:"August",
+                        9:"Setember",
+                        10:"October",
+                        11:"November",
+                        12:"December"
+                    }
+
+                    let x = document.getElementById("yearBT");
+                    let y = x.options[x.selectedIndex].value;
+                    let sum = 0;
+                    let a = d.getDate();
+                    let OS1 = 0;
+                    let t = 0;
+                    let total = 0;
+
+                    for(let i = y; i < d.getFullYear(); i++){
+                        tfVale = isLeapYear(i);
+                        if(tfVale === true){
+                            sum += 366
+                        }
+                        else{
+                            sum +=365
+                        }
+                    }
+                    
+                    
+                    //This calculates how a months should be add
+                    if(dict[document.getElementById("monthBT").value] < (d.getMonth()+1)){
+                        if(isLeapYear(document.getElementById("yearBT").value) === true && sum != 0){
+                            OS1 = -366
+                        }
+                        else if (isLeapYear(document.getElementById("yearBT").value) === false && sum != 0){
+                           OS1 = -365 
+                        }
+                        for(let i = dict[document.getElementById("monthBT").value]; i < (d.getMonth()+1);i++)
+                        {
+                            t = addMonthsFun(dict[i]);
+                            total += t;
+                        }
+                    }
+                    else{
+                        for (let i = (d.getMonth()+1); i < dict[document.getElementById("monthBT").value]; i++){
+                            t = addMonthsFun(dict[i]);
+                            total += t;
+                        }
+                    }
+                    
+                //This calculates how days should be added
+                let da = (d.getDate()-document.getElementById("dayBT").value);
+                sum = sum+total+OS1+da;
+
+                document.getElementById("filler").innerHTML = "You are: "+sum+" day(s) old.";
+                }
+            </script>
+            <!-- Under this is the array populator -->
+            <script>
+
+                let month = document.getElementById("monthBT"),
+                monthArr = ["January", "Febuary","March", "April", "May", "June", 
+                "July", "August", "Setember", "October", "November", "December"];
+
+                for(let i=0; i< monthArr.length; i++){
+                    let option = document.createElement("OPTION"),
+                        txt = document.createTextNode(monthArr[i]);
+                    option.appendChild(txt);
+                    month.insertBefore(option, month.lastChild);
+                }
+            </script>
+            
+            <script>
+                let day = document.getElementById("dayBT"),
+                dayArr = [];
+
+                for(let i = 1; i <= 31; i++){
+                    dayArr.push(i)
+                }
+
+                for(let i=0; i < dayArr.length; i++){
+                    let option = document.createElement("OPTION"),
+                        txt = document.createTextNode(dayArr[i]);
+                    option.appendChild(txt);
+                    day.insertBefore(option, day.lastChild);
+                }
+            </script>
+
+            <script>
+                let year = document.getElementById("yearBT"),
+                yearArr = [];
+
+                for(let i = 1900; i <= d.getFullYear(); i++){
+                    yearArr.push(i)
+                }
+
+                for(let i=0; i< yearArr.length; i++){
+                    let option = document.createElement("OPTION"),
+                        txt = document.createTextNode(yearArr[i]);
+                    option.appendChild(txt);
+                    year.insertBefore(option, year.lastChild);
+                }
+            </script>
+
+            <!--This checks if a year is a leap year-->
+            <script>
+                function isLeapYear(m){
+                if ((m%4 === 0 && m%100 != 0) || (m%4 === 0 && m%400 === 0)){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+                }
+            </script>
+            <!--This is going to return the numbers for the days-->
+            <script>
+                function addMonthsFun(mon){
+                if(mon === "April"  
+                    ||mon === "June" 
+                    ||mon === "Setember" 
+                    ||mon === "November"){
+                        return 30;
+                }
+                    else if(mon === "Febuary")
+                    {
+                        if (isLeapYear(document.getElementById("yearBT").value) === true){
+                            return 29;
+                        }
+                        else{
+                            return 28
+                        }
+                    }
+                return 31;
+                }
+            </script>
+        </header>
+    </body>
+</html>
